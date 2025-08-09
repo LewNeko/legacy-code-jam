@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>It Just Works - Retro Jam</title>
+<style>
+  body {
+    background: url('https://i.gifer.com/7VE.gif') repeat;
+    font-family: "Comic Sans MS", cursive;
+    text-align: center;
+    color: yellow;
+  }
+  #gameArea {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background: black;
+    border: 5px solid lime;
+    position: relative;
+  }
+  .player {
+    width: 40px;
+    height: 40px;
+    background: red;
+    position: absolute;
+  }
+  .enemy {
+    width: 40px;
+    height: 40px;
+    background: blue;
+    position: absolute;
+  }
+</style>
+</head>
+<body>
+
+<h1><blink>IT JUST WORKS!</blink></h1>
+<p>Use arrow keys to dodge the enemy!</p>
+<div id="gameArea">
+  <div id="player" class="player"></div>
+  <div id="enemy" class="enemy"></div>
+</div>
+
+<script>
+// Player position
+var playerX = 180;
+var playerY = 180;
+
+// Enemy position
+var enemyX = 0;
+var enemyY = 0;
+
+// Movement speed
+var speed = 20;
+
+// Get elements
+var player = document.getElementById("player");
+var enemy = document.getElementById("enemy");
+
+// Draw player and enemy
+function draw() {
+  player.style.left = playerX + "px";
+  player.style.top = playerY + "px";
+  enemy.style.left = enemyX + "px";
+  enemy.style.top = enemyY + "px";
+}
+
+// Handle keys
+document.onkeydown = function(e) {
+  if (e.key === "ArrowUp") playerY -= speed;
+  if (e.key === "ArrowDown") playerY += speed;
+  if (e.key === "ArrowLeft") playerX -= speed;
+  if (e.key === "ArrowRight") playerX += speed;
+  draw();
+};
+
+// Enemy movement
+setInterval(function() {
+  if (enemyX < playerX) enemyX += speed;
+  if (enemyX > playerX) enemyX -= speed;
+  if (enemyY < playerY) enemyY += speed;
+  if (enemyY > playerY) enemyY -= speed;
+
+  // Collision check
+  if (playerX === enemyX && playerY === enemyY) {
+    alert("GAME OVER! Refresh to try again!");
+  }
+
+  draw();
+}, 500);
+
+draw();
+</script>
+
+</body>
+</html>
