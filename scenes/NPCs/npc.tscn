@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxyv23s8dall"]
+
+[ext_resource type="Texture2D" uid="uid://jm7t1ggl1mbh" path="res://icon.svg" id="1_if67s"]
+[ext_resource type="Script" uid="uid://daffg70i3626c" path="res://scenes/NPCs/npc.gd" id="1_qojcf"]
+[ext_resource type="PackedScene" uid="uid://b168x8ntlguu5" path="res://scenes/Dialogue/dialogue.tscn" id="3_iag0i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qojcf"]
+radius = 61.0082
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iag0i"]
+radius = 185.327
+
+[node name="NPC" type="CharacterBody2D"]
+script = ExtResource("1_qojcf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_if67s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_qojcf")
+
+[node name="chat_detection_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chat_detection_area"]
+shape = SubResource("CircleShape2D_iag0i")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Dialogue" parent="." instance=ExtResource("3_iag0i")]
+
+[connection signal="body_entered" from="chat_detection_area" to="." method="_on_chat_detection_area_body_entered"]
+[connection signal="body_exited" from="chat_detection_area" to="." method="_on_chat_detection_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="dialog_finished" from="Dialogue" to="." method="_on_dialogue_dialog_finished"]

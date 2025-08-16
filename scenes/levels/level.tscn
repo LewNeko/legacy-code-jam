@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpq28wly6pag0"]
+[gd_scene load_steps=14 format=3 uid="uid://dpq28wly6pag0"]
 
 [ext_resource type="Script" uid="uid://hj2dm1jgey33" path="res://scenes/levels/level.gd" id="1_sebqq"]
 [ext_resource type="PackedScene" uid="uid://bnqnneyycsjwd" path="res://scenes/Objects/gate.tscn" id="2_epet5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://btea84ivuolna" path="res://graphics/decals/moss/moss_3.png" id="6_bt010"]
 [ext_resource type="Texture2D" uid="uid://daclh3dcxq6jk" path="res://graphics/decals/moss/moss_4.png" id="7_dmq5p"]
 [ext_resource type="Texture2D" uid="uid://b7gmph0jmcqej" path="res://graphics/tilesets/outside_walls.png" id="8_h42y3"]
+[ext_resource type="PackedScene" uid="uid://dxyv23s8dall" path="res://scenes/NPCs/npc.tscn" id="11_7pb6i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1t7p2"]
 resource_name = "walls"
@@ -77,6 +78,9 @@ position = Vector2(319, 750)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.6, 0.6)
 position_smoothing_enabled = true
+
+[node name="NPC" parent="." instance=ExtResource("11_7pb6i")]
+position = Vector2(-110, 1094)
 
 [connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
 [connection signal="grenade" from="Player" to="." method="_on_player_grenade"]
