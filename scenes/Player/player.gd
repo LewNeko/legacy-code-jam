@@ -52,3 +52,5 @@ func _on_timer_timeout():
 
 func _on_grenade_reload_timer_timeout():
 	can_grenade = true
+
+#i found the scripts!
